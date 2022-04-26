@@ -5,12 +5,11 @@
 * {
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden;
+
 }
 
-canvas {
-  box-sizing: border-box;
-  border: solid 6px blue;
-}
 
 #game-start {
   position: fixed;

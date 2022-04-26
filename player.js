@@ -20,7 +20,7 @@ class Player {
     move(frameId) {  
       this.y += this.speedY;
       if (this.y < this.ctx.canvas.height - this.height)
-        this.speedY += 2; // this is gravity reducing the vertical speed
+        this.speedY += 0.9; // this is gravity reducing the vertical speed
       else this.speedY = 0; // when player hits the ground we stop the speed
     }
   

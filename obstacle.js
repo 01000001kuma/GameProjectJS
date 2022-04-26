@@ -2,7 +2,7 @@ class Obstacle {
     constructor(ctx, x0, y0, img) {
       this.ctx = ctx;
       this.img = img;
-      this.speedX = -5;
+      this.speedX = -10;
       this.speedY = 0;
       this.width = 100;
       this.height = 100;

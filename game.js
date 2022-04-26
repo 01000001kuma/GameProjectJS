@@ -1,9 +1,10 @@
 class Game {
-    screen = 1; // 0= splash start, 1 = game, 2 = gamover
+    screen = 0 // 0= splash start, 1 = game, 2 = gamover
     points = 0;
     ctx = null;
     frameId = null;
     background = null;
+    sounds = new Sounds();
     player = null;
     obstacles = [];
   
@@ -67,18 +68,36 @@ class Game {
       }
     }
   
+    checkCollisions() {
+        this.obstacles = this.obstacles.filter(
+          (obstacle) => obstacle.x + obstacle.width > 0
+        );
+        this.obstacles.forEach((obstacle) => {
+          if (
+            this.player.x + this.player.width > obstacle.x &&
+            this.player.x < obstacle.x + obstacle.width
+          ) {
+            if (this.player.y + this.player.height > obstacle.y) {
+              console.log("collision");
+            }
+          }
+        });
+      }
+  
     reset() {
       this.background = new Background(this.ctx);
       this.player = new Player(this.ctx);
+      // this.sounds.play("main");
     }
   
     play() {
       this.background.move(this.frameId);
-      this.background.draw(this.frameId);
       this.player.move(this.frameId);
-      this.player.draw(this.frameId);
       this.generateObstacle();
       this.obstacles.forEach((obstacle) => obstacle.move(this.frameId));
+      this.checkCollisions();
+      this.background.draw(this.frameId);
+      this.player.draw(this.frameId);
       this.obstacles.forEach((obstacle) => obstacle.draw(this.frameId));
       this.frameId = requestAnimationFrame(this.play.bind(this));
     }
