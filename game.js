@@ -5,11 +5,11 @@ class Game {
     frameId = null;
     background = null;
     player = null;
-    canvas = null;
+    
   
     init() {
       if (this.ctx === null) {
-        this.canvas = document.getElementById("canvas")
+        
         this.ctx = document.getElementById("canvas").getContext("2d");
       }
       this.setCanvasToFullScreen();
@@ -34,12 +34,12 @@ class Game {
     }
   
     setCanvasToFullScreen() {
-      this.canvas.height = window.innerHeight;
-      this.canvas.width = window.innerWidth;
+      this.ctx.canvas.height = window.innerHeight;
+      this.ctx.canvas.width = window.innerWidth;
     }
   
     setEventHandlers() {
-      window.addEventListener("resize", this.setCanvasToFullScreen);
+      window.addEventListener("resize", this.setCanvasToFullScreen.bind(this));
     }
   
     displaySplashStart() {
