@@ -1,19 +1,19 @@
 :root {
-    font-size: 16px;
-  }
-  
-  * {
-    margin: 0;
-    padding: 0;
-  }
-  
-  canvas {
-    box-sizing: border-box;
-    border: solid 6px blue;
-  }
-  
-  #game-start {
-    position: fixed;
-    top: 40vh;
-    left: 40vw;
-  }
+  font-size: 16px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  box-sizing: border-box;
+  border: solid 6px blue;
+}
+
+#game-start {
+  position: fixed;
+  top: 40vh;
+  left: 40vw;
+}

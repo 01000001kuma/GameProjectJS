@@ -9,6 +9,19 @@ class Player {
       this.spriteNumber = 0;
       this.img = new Image();
       this.img.src = "./Pictures/player.png";
+      this.speedY = 0;
+    }
+  
+    jump() {
+      console.log("Mario is jumping");
+      if (this.speedY === 0) this.speedY = -40;
+    }
+  
+    move(frameId) {  
+      this.y += this.speedY;
+      if (this.y < this.ctx.canvas.height - this.height)
+        this.speedY += 2; // this is gravity reducing the vertical speed
+      else this.speedY = 0; // when player hits the ground we stop the speed
     }
   
     animate(frameId) {
@@ -40,4 +53,6 @@ class Player {
       );
     }
   }
+  
+  
   

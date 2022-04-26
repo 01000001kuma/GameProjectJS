@@ -5,11 +5,10 @@ class Game {
     frameId = null;
     background = null;
     player = null;
-    
+    obstacles = [];
   
     init() {
       if (this.ctx === null) {
-        
         this.ctx = document.getElementById("canvas").getContext("2d");
       }
       this.setCanvasToFullScreen();
@@ -40,6 +39,9 @@ class Game {
   
     setEventHandlers() {
       window.addEventListener("resize", this.setCanvasToFullScreen.bind(this));
+      window.addEventListener("keydown", (event) => {
+        if (event.code === "Space") this.player.jump();
+      });
     }
   
     displaySplashStart() {
@@ -54,6 +56,17 @@ class Game {
       document.body.appendChild(startButton);
     }
   
+    generateObstacle() {
+      if (this.frameId > 100) {
+        if (this.frameId % 150 === 0) {
+          console.log("Obstacle generated");
+          this.obstacles.push(
+            new Obstacle(this.ctx, this.ctx.canvas.width, this.ctx.canvas.height)
+          );
+        }
+      }
+    }
+  
     reset() {
       this.background = new Background(this.ctx);
       this.player = new Player(this.ctx);
@@ -62,7 +75,11 @@ class Game {
     play() {
       this.background.move(this.frameId);
       this.background.draw(this.frameId);
+      this.player.move(this.frameId);
       this.player.draw(this.frameId);
+      this.generateObstacle();
+      this.obstacles.forEach((obstacle) => obstacle.move(this.frameId));
+      this.obstacles.forEach((obstacle) => obstacle.draw(this.frameId));
       this.frameId = requestAnimationFrame(this.play.bind(this));
     }
   }
